@@ -2,6 +2,7 @@ const CarDB = require('../model/carModel');
 require('dotenv').config();
 
 // Create Functions
+
 exports.carparking = async(req, res) => {
     try {
         let carDetails = new CarDB({
@@ -33,7 +34,7 @@ exports.carparking = async(req, res) => {
                 console.log(err);
             })
     } catch (err) {
-        res.status(400).send({ error: err.message, success: false })
+        res.status(404).send({ error: err.message, success: false })
     }
 }
 
@@ -47,7 +48,7 @@ exports.unParkedCar = async(req, res) => {
                 res.status(400).send(error)
             })
     } catch (err) {
-        res.send({ error: err.message, success: false })
+        res.status(404).send({ error: err.message, success: false })
     }
 }
 
@@ -64,21 +65,6 @@ exports.getCarById = async(req, res) => {
             })
     } catch (err) {
         console.log(err);
-        res.status(400).send({ error: err.message, success: false })
-    }
-}
-exports.getCarById = async(req, res) => {
-    try {
-        let carNumber = req.params.number
-        await CarDB.findById(carNumber)
-            .then((data) => {
-                res.status(200).send(data)
-            })
-            .catch((error) => {
-                res.status(400).send(error)
-            })
-    } catch (err) {
-        console.log(err);
-        res.status(400).send({ error: err.message, success: false })
+        res.status(404).send({ error: err.message, success: false })
     }
 }
